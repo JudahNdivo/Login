@@ -32,4 +32,14 @@ class user_forms {
                     <?php print (isset($err['usernameExists_err'])) ? "<span class='invalid'>" . $err['usernameExists_err'] . "</span>" : '' ; ?>
                     <?php print (isset($err['usernameLetters_err'])) ? "<span class='invalid'>" . $err['usernameLetters_err'] . "</span>" : '' ; ?>
                 </div>
+                <button type="submit" name="signup" class="btn btn-primary">Submit</button>
+              </form>
+          </div>
+        </div>
+<?php
+    }
+
+    // Method for verification code form:
+    public function verify_code_form($ObjGlob) {
+?>
 
