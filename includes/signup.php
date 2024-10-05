@@ -1,0 +1,2 @@
+<?php
+$ObjLayouts->heading();
