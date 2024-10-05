@@ -13,3 +13,13 @@ CREATE TABLE IF NOT EXISTS `gender` (
   PRIMARY KEY (`genderId`),
   UNIQUE KEY `gender` (`gender`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+-- Drop and create the roles table
+DROP TABLE IF EXISTS `roles`;
+CREATE TABLE IF NOT EXISTS `roles` (
+  `roleId` tinyint(1) NOT NULL AUTO_INCREMENT,
+  `role` varchar(20) NOT NULL DEFAULT '',
+  `created` datetime NOT NULL DEFAULT current_timestamp(),
+  `updated` datetime NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  PRIMARY KEY (`roleId`),
+  UNIQUE KEY `role` (`role`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
