@@ -13,7 +13,7 @@ include('includess/navbarr.php');
                     <h5>Registration Form</h5>
                 </div>
                 <div class="card-body">
-                    <form action="">
+                    <form action="code.php" method="post">
                         <div class="form-group mb-3">
                           <label for="name">Name</label>
                            <input type="text" name="name" id="name" class="form-control">
@@ -35,7 +35,7 @@ include('includess/navbarr.php');
                            <input type="password" name="confirm_password" id="confirm_password" class="form-control">
                         </div>
                         <div class="form-group mb-3">
-                            <button type="submit" class="btn btn-primary">Register Today</button>
+                            <button type="submit" name="register_btn" class="btn btn-primary">Register Today</button>
                         </div>
                     </form>
 
