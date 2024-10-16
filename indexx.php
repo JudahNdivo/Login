@@ -1,5 +1,8 @@
-<?php include('includess/headerr.php'); ?>
-<?php include('includess/navbarr.php'); ?>
+<?php 
+
+include('includess/headerr.php');
+include('includess/navbarr.php'); 
+?>
 <div class="py-5"> 
     <div class="container">
         <div class="row">

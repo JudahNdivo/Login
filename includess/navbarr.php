@@ -1,4 +1,8 @@
-<nav class="navbar navbar-expand-lg bg-body-tertiary">
+<div class="bg-dark">
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+        <nav class="navbar navbar-expand-lg navbar-dark">
   <div class="container-fluid">
 
     <a class="navbar-brand" href="#">Kimuyu Enterprise</a>
@@ -6,7 +10,7 @@
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+      <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
         <li class="nav-item">
           <a class="nav-link active" href="indexx.php">Home</a>
         </li>
@@ -20,3 +24,9 @@
 </div>
 </div>
 </nav>
+
+        </div>
+
+    </div>
+</div>
+</div>
