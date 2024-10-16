@@ -1,12 +1,12 @@
 <?php 
-
+$page_title = "Home Page";
 include('includess/headerr.php');
 include('includess/navbarr.php'); 
 ?>
 <div class="py-5"> 
     <div class="container">
         <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-12 text-center">
                 <h3>Login and Registration System in PHP</h3>
                 <h4>With Email Verification</h4>
 

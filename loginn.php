@@ -1,5 +1,5 @@
 <?php 
-$page_title = "Registration Form";
+$page_title = "Login Form";
 include('includess/headerr.php');
 include('includess/navbarr.php'); 
 ?>
@@ -10,18 +10,11 @@ include('includess/navbarr.php');
            <div class="col-md-6">
             <div class="card shadow">
                 <div class="card-header">
-                    <h5>Registration Form</h5>
+                    <h5>Login Form</h5>
                 </div>
                 <div class="card-body">
                     <form action="">
-                        <div class="form-group mb-3">
-                          <label for="name">Name</label>
-                           <input type="text" name="name" id="name" class="form-control">
-                        </div>
-                        <div class="form-group mb-3">
-                          <label for="name">Phone Number</label>
-                           <input type="text" name="phone" id="phone" class="form-control">
-                        </div>
+                       
                         <div class="form-group mb-3">
                           <label for="name">Email Address</label>
                            <input type="email" name="email" id="name" class="form-control">
@@ -30,12 +23,9 @@ include('includess/navbarr.php');
                           <label for="password">Password</label>
                            <input type="password" name="password" id="password" class="form-control">
                         </div>
+                      
                         <div class="form-group mb-3">
-                          <label for="name">Confirm Password</label>
-                           <input type="password" name="confirm_password" id="confirm_password" class="form-control">
-                        </div>
-                        <div class="form-group mb-3">
-                            <button type="submit" class="btn btn-primary">Register Today</button>
+                            <button type="submit" class="btn btn-primary">Login Now</button>
                         </div>
                     </form>
 
