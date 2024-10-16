@@ -1,2 +1,15 @@
 <?php
-$con = mysqli_connect("localhost", "root", "", "project");   
+// Database connection script
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "project";
+
+// Create connection
+$con = new mysqli($servername, $username, $password, $dbname);
+
+// Check connection
+if ($con->connect_error) {
+    die("Connection failed: " . $con->connect_error);
+}
+?>

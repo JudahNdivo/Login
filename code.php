@@ -1,49 +1,83 @@
-<?php 
+<?php
 session_start();
-include('dbcon.php');
-
-//Import PHPMailer classes into the global namespace
-//These must be at the top of your script, not inside a function
+include('dbcon.php'); // Include the database connection script
 use PHPMailer\PHPMailer\PHPMailer;
-use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
 
-//Load Composer's autoloader
+// Load Composer's autoloader
 require 'vendor/autoload.php';
 
-function sendemail_verify($name, $email, $verify_token){
-   //Create an instance; passing `true` enables exceptions
-   $mail = new PHPMailer(true);
-
+if ($con === false) {
+    die("ERROR: Could not connect. " . $con->connect_error);
 }
-if(isset($_POST['register_btn'])){
+
+function sendemail_verify($name, $email, $verify_token) {
+    $mail = new PHPMailer(true);
+
+    try {
+        // Server settings
+        $mail->isSMTP();
+        $mail->Host       = 'smtp.gmail.com';
+        $mail->SMTPAuth   = true;
+        $mail->Username   = 'judahndivo@gmail.com'; // Your email
+        $mail->Password   = 'ysys xjkz iigq xvba';     // Your app password
+        $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+        $mail->Port       = 587;
+
+        // Recipients
+        $mail->setFrom('your_email@gmail.com', 'Your Name');
+        $mail->addAddress($email, $name);
+
+        // Content
+        $mail->isHTML(true);
+        $mail->Subject = 'Email Verification';
+        $mail->Body    = "Hi $name,<br>Please verify your email by clicking the link below:<br>
+                          <a href='http://localhost/Login/Login/verify_email.php?token=$verify_token'>Verify Email</a>";
+        $mail->AltBody = "Hi $name,\nPlease verify your email by clicking the link below:\n
+                          http://localhost/Login/Login/verify_email.php?token=$verify_token";
+
+        $mail->send();
+        header('Location: verify_email.php');
+    } catch (Exception $e) {
+        echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+    }
+}
+
+if (isset($_POST['register_btn'])) {
     $name = $_POST['name'];
     $phone = $_POST['phone'];
     $email = $_POST['email'];
     $password = $_POST['password'];
     $verify_token = md5(rand());
 
-    //Check whether email exists or not:
-    $check_email_query = "SELECT * FROM the_users WHERE email = '$email' LIMIT 1";
-    $check_email_query_run = mysqli_query($con, $check_email_query);
+    // Check if email already exists in the database
+    $check_email_query = "SELECT * FROM the_users WHERE email = ? LIMIT 1";
+    $stmt = $con->prepare($check_email_query);
+    $stmt->bind_param("s", $email);
+    $stmt->execute();
+    $result = $stmt->get_result();
 
-    if($mysqli_num_rows($check_email_query_run) > 0){
-       $_SESSION['status'] = "Email Already Exists";
+    if ($result->num_rows > 0) {
+        $_SESSION['status'] = "Email Already Exists";
         header('Location: registerr.php');
-    }else{
-        //Insert user data
-        $query = "INSERT INTO the_users (name, phone, email, password, verify_token) VALUES ('$name', '$phone', '$email', '$password', '$verify_token')";
-        $query_run = mysqli_query($con, $query);
+        exit;
+    } else {
+        // Insert user data into the database
+        $query = "INSERT INTO the_users (name, phone, email, password, verify_token) VALUES (?, ?, ?, ?, ?)";
+        $stmt = $con->prepare($query);
+        $stmt->bind_param("sssss", $name, $phone, $email, $password, $verify_token);
+        $stmt->execute();
 
-        if($query_run){
-            sendemail_verify("$name", "$email", "$verify_token");
-            $_SESSION['status'] = "Registration Successful!Verify Your Email";
-            header('Location: verifyy.php');
-
-    }else{
-        $_SESSION['status'] = "Registration Failed";
-        header('Location: registerr.php');
+        if ($stmt->affected_rows > 0) {
+            sendemail_verify($name, $email, $verify_token);
+            $_SESSION['status'] = "Registration Successful! Verify Your Email";
+            header('Location: verify_email.php');
+            exit;
+        } else {
+            $_SESSION['status'] = "Registration Failed";
+            header('Location: registerr.php');
+            exit;
+        }
     }
-}
 }
 ?>
