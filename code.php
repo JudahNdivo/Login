@@ -20,7 +20,7 @@ function sendemail_verify($name, $email, $verify_token) {
         $mail->Host       = 'smtp.gmail.com';
         $mail->SMTPAuth   = true;
         $mail->Username   = 'judahndivo@gmail.com'; // Your email
-        $mail->Password   = 'ysys xjkz iigq xvba';     // Your app password
+        $mail->Password   = 'ysys xjkz iigq xvba';   // Your app password
         $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
         $mail->Port       = 587;
 
@@ -31,9 +31,11 @@ function sendemail_verify($name, $email, $verify_token) {
         // Content
         $mail->isHTML(true);
         $mail->Subject = 'Email Verification';
-        $mail->Body    = "Hi $name,<br>Please verify your email by clicking the link below:<br>
+        $mail->Body    = "Hi $name,<br><br>Your verification code is: <strong>$verify_token</strong><br><br>
+                          Alternatively, you can verify your email by clicking the link below:<br>
                           <a href='http://localhost/Login/Login/verify_email.php?token=$verify_token'>Verify Email</a>";
-        $mail->AltBody = "Hi $name,\nPlease verify your email by clicking the link below:\n
+        $mail->AltBody = "Hi $name,\n\nYour verification code is: $verify_token\n\n
+                          Alternatively, you can verify your email by clicking the link below:\n
                           http://localhost/Login/Login/verify_email.php?token=$verify_token";
 
         $mail->send();
