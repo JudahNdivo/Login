@@ -25,7 +25,7 @@ function sendemail_verify($name, $email, $verify_token) {
         $mail->Port       = 587;
 
         // Recipients
-        $mail->setFrom('your_email@gmail.com', 'Your Name');
+        $mail->setFrom('huntjohn217@gmail.com', 'Your Name');
         $mail->addAddress($email, $name);
 
         // Content
@@ -39,7 +39,7 @@ function sendemail_verify($name, $email, $verify_token) {
                           http://localhost/Login/Login/verify_email.php?token=$verify_token";
 
         $mail->send();
-        header('Location: verify_email.php');
+        // Don't redirect here; let the registration flow continue
     } catch (Exception $e) {
         echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
     }
@@ -51,6 +51,9 @@ if (isset($_POST['register_btn'])) {
     $email = $_POST['email'];
     $password = $_POST['password'];
     $verify_token = md5(rand());
+
+    // Store the verification token in a session variable
+    $_SESSION['verify_token'] = $verify_token; // Store the token in session
 
     // Check if email already exists in the database
     $check_email_query = "SELECT * FROM the_users WHERE email = ? LIMIT 1";

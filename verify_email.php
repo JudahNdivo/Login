@@ -10,6 +10,15 @@
 <body>
     <div class="container">
         <h2>Verify Your Code</h2>
+        
+        <?php
+        // Display any status messages
+        if (isset($_SESSION['status'])) {
+            echo "<div class='alert alert-info'>" . $_SESSION['status'] . "</div>";
+            unset($_SESSION['status']);
+        }
+        ?>
+
         <form action="process_verify.php" method="POST">
             <div class="mb-3">
                 <label for="code" class="form-label">Enter the code sent to your email:</label>

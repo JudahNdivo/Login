@@ -1,4 +1,5 @@
 <?php 
+session_start(); // Start the session
 $page_title = "Login Form";
 include('includess/headerr.php');
 include('includess/navbarr.php'); 
@@ -13,15 +14,21 @@ include('includess/navbarr.php');
                     <h5>Login Form</h5>
                 </div>
                 <div class="card-body">
-                    <form action="">
-                       
+                    <?php
+                    // Display error message if it exists
+                    if (isset($_SESSION['error'])) {
+                        echo "<div class='alert alert-danger'>" . $_SESSION['error'] . "</div>";
+                        unset($_SESSION['error']); // Clear the error message after displaying it
+                    }
+                    ?>
+                    <form action="login_config.php" method="POST">
                         <div class="form-group mb-3">
                           <label for="name">Email Address</label>
-                           <input type="email" name="email" id="name" class="form-control">
+                           <input type="email" name="email" id="name" class="form-control" required>
                         </div>
                         <div class="form-group mb-3">
                           <label for="password">Password</label>
-                           <input type="password" name="password" id="password" class="form-control">
+                           <input type="password" name="password" id="password" class="form-control" required>
                         </div>
                       
                         <div class="form-group mb-3">
@@ -36,6 +43,5 @@ include('includess/navbarr.php');
         </div>
         </div>
     </div>
-
 
 <?php include('includess/footerr.php'); ?>
